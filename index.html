@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lily's Pottery — Selected Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f1ebe1;
+    --bg-2:#e8dfd1;
+    --ink:#1c1a17;
+    --ink-soft:#5a5249;
+    --accent:#b85c3c;
+    --rule:rgba(28,26,23,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  .serif{font-family:'Fraunces',serif;font-weight:300;font-variation-settings:"SOFT" 50,"WONK" 0;letter-spacing:-.02em;line-height:.95}
+  .italic{font-style:italic}
+  .eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+
+  /* ───────── Top nav ───────── */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:24px 36px;
+    mix-blend-mode:difference;color:#f1ebe1;
+    pointer-events:none;
+  }
+  .nav .mark{font-family:'Fraunces',serif;font-weight:400;font-size:18px;letter-spacing:-.01em}
+  .nav .links{display:flex;gap:28px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;pointer-events:auto}
+  .nav .links a{opacity:.85;transition:opacity .2s}
+  .nav .links a:hover{opacity:1}
+
+  /* ───────── Hero ───────── */
+  .hero{
+    position:relative;min-height:100vh;
+    display:grid;grid-template-columns:1.05fr .95fr;
+    padding:120px 36px 60px;gap:48px;align-items:end;
+  }
+  .hero-type{position:relative;z-index:2}
+  .hero-type .eyebrow{margin-bottom:32px;display:block}
+  .hero-type h1{
+    font-family:'Fraunces',serif;
+    font-weight:300;
+    font-size:clamp(64px,11vw,168px);
+    line-height:.86;letter-spacing:-.04em;
+    font-variation-settings:"SOFT" 100,"WONK" 1;
+  }
+  .hero-type h1 em{
+    font-style:italic;font-weight:300;color:var(--accent);
+    font-variation-settings:"SOFT" 100,"WONK" 1;
+  }
+  .hero-type .sub{
+    margin-top:36px;max-width:38ch;font-size:15px;line-height:1.55;color:var(--ink-soft);
+  }
+  .hero-img{
+    position:relative;aspect-ratio:3/4;overflow:hidden;
+    background:var(--bg-2);
+    transform:translateY(0);
+  }
+  .hero-img img{
+    width:100%;height:100%;object-fit:cover;
+    transform:scale(1.05);transition:transform 1.2s ease;
+  }
+  .hero:hover .hero-img img{transform:scale(1.08)}
+  .hero-meta{
+    position:absolute;bottom:32px;left:36px;right:36px;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .hero-meta .scroll-cue{display:flex;align-items:center;gap:10px}
+  .hero-meta .scroll-cue .line{width:48px;height:1px;background:var(--ink-soft);position:relative;overflow:hidden}
+  .hero-meta .scroll-cue .line::after{
+    content:"";position:absolute;inset:0;background:var(--ink);
+    transform:translateX(-100%);animation:slide 2.4s ease-in-out infinite;
+  }
+  @keyframes slide{
+    0%{transform:translateX(-100%)}
+    50%{transform:translateX(0)}
+    100%{transform:translateX(100%)}
+  }
+
+  /* ───────── Horizontal gallery ───────── */
+  .gallery-wrap{position:relative;background:var(--bg)}
+  .gallery-pin{position:sticky;top:0;height:100vh;overflow:hidden}
+  .gallery-track{
+    height:100%;display:flex;align-items:center;
+    padding:0 8vw;gap:6vw;
+    will-change:transform;
+  }
+  .gallery-head{
+    flex:0 0 auto;width:60vw;max-width:720px;padding-right:4vw;
+    border-right:1px solid var(--rule);
+  }
+  .gallery-head .eyebrow{display:block;margin-bottom:24px}
+  .gallery-head h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(48px,6vw,96px);line-height:.95;letter-spacing:-.03em;
+    font-variation-settings:"SOFT" 80,"WONK" 1;
+  }
+  .gallery-head h2 em{font-style:italic;color:var(--accent);font-weight:300}
+  .gallery-head p{margin-top:28px;max-width:46ch;color:var(--ink-soft);font-size:15px;line-height:1.6}
+
+  .piece{flex:0 0 auto;display:flex;flex-direction:column;gap:18px;position:relative}
+  .piece.small{width:32vw;max-width:420px}
+  .piece.medium{width:42vw;max-width:560px}
+  .piece.large{width:54vw;max-width:720px}
+  .piece .frame{
+    position:relative;width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--bg-2);
+  }
+  .piece.tall .frame{aspect-ratio:4/5}
+  .piece .frame img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .6s;
+  }
+  .piece:hover .frame img{transform:scale(1.04)}
+  .piece .num{
+    position:absolute;top:14px;left:14px;
+    font-family:'Fraunces',serif;font-style:italic;font-size:14px;
+    color:#fff;mix-blend-mode:difference;letter-spacing:.05em;
+  }
+  .piece .caption{display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+  .piece .caption .name{
+    font-family:'Fraunces',serif;font-weight:400;font-size:20px;letter-spacing:-.01em;
+    font-variation-settings:"SOFT" 50;
+  }
+  .piece .caption .name em{font-style:italic;font-weight:300}
+  .piece .caption .meta{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+  .piece .desc{font-size:13px;color:var(--ink-soft);line-height:1.55;max-width:38ch}
+
+  .gallery-end{
+    flex:0 0 auto;width:36vw;max-width:480px;
+    display:flex;flex-direction:column;justify-content:center;gap:24px;
+    padding-left:2vw;
+  }
+  .gallery-end .eyebrow{color:var(--accent)}
+  .gallery-end p{
+    font-family:'Fraunces',serif;font-weight:300;font-size:32px;line-height:1.15;letter-spacing:-.01em;
+    font-variation-settings:"SOFT" 80;
+  }
+  .gallery-end p em{font-style:italic;color:var(--accent)}
+
+  /* progress indicator */
+  .progress{
+    position:absolute;left:36px;bottom:36px;z-index:5;
+    display:flex;align-items:center;gap:14px;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .progress .bar{width:120px;height:1px;background:var(--rule);position:relative}
+  .progress .bar::after{
+    content:"";position:absolute;left:0;top:0;height:100%;background:var(--ink);
+    width:var(--p,0%);transition:width .15s linear;
+  }
+
+  /* ───────── About ───────── */
+  .about{
+    padding:160px 8vw;display:grid;
+    grid-template-columns:1fr 1fr;gap:8vw;align-items:start;
+    border-top:1px solid var(--rule);
+  }
+  .about .eyebrow{display:block;margin-bottom:32px}
+  .about h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.03em;
+    font-variation-settings:"SOFT" 80,"WONK" 1;
+  }
+  .about h2 em{font-style:italic;color:var(--accent)}
+  .about .body{font-size:16px;line-height:1.7;color:var(--ink-soft);max-width:52ch}
+  .about .body p + p{margin-top:1em}
+  .about .body .lead{
+    font-family:'Fraunces',serif;font-weight:300;font-size:24px;line-height:1.35;
+    color:var(--ink);margin-bottom:1.2em;letter-spacing:-.01em;
+  }
+
+  /* ───────── Contact ───────── */
+  .contact{
+    padding:120px 8vw 80px;border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end;
+  }
+  .contact .eyebrow{display:block;margin-bottom:24px}
+  .contact h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(56px,9vw,140px);line-height:.9;letter-spacing:-.04em;
+    font-variation-settings:"SOFT" 100,"WONK" 1;
+  }
+  .contact h2 em{font-style:italic;color:var(--accent)}
+  .contact h2 a{
+    background-image:linear-gradient(var(--accent),var(--accent));
+    background-size:0% 1px;background-repeat:no-repeat;background-position:0 95%;
+    transition:background-size .5s;
+  }
+  .contact h2 a:hover{background-size:100% 1px}
+  .contact .info{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);text-align:right;line-height:2}
+
+  footer{
+    padding:24px 36px;display:flex;justify-content:space-between;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+    border-top:1px solid var(--rule);
+  }
+
+  /* ───────── Reveal animation ───────── */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ───────── Mobile ───────── */
+  @media (max-width:860px){
+    .nav{padding:18px 20px}
+    .hero{grid-template-columns:1fr;padding:100px 20px 40px;gap:32px;min-height:auto}
+    .hero-img{aspect-ratio:4/5}
+    .hero-meta{position:static;margin-top:16px;flex-wrap:wrap;gap:12px}
+    .gallery-wrap{height:auto}
+    .gallery-pin{position:relative;height:auto;overflow:visible}
+    .gallery-track{flex-direction:column;padding:60px 20px;height:auto;gap:48px;transform:none!important}
+    .gallery-head,.gallery-end,.piece{width:100%!important;max-width:none}
+    .gallery-head{border-right:none;border-bottom:1px solid var(--rule);padding:0 0 40px}
+    .progress{display:none}
+    .about{grid-template-columns:1fr;padding:80px 20px;gap:32px}
+    .contact{grid-template-columns:1fr;padding:80px 20px 40px}
+    .contact .info{text-align:left}
+    footer{padding:20px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="mark">Lily's Pottery</div>
+  <div class="links">
+    <a href="#works">Works</a>
+    <a href="#about">Studio</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ───────────────────── HERO ───────────────────── -->
+<section class="hero">
+  <div class="hero-type">
+    <span class="eyebrow">Studio — Est. 2024</span>
+    <h1>Quiet<br>objects,<br><em>made slowly.</em></h1>
+    <p class="sub">A small body of wheel-thrown and hand-built work by Lily — vessels, bowls, and one-of-a-kind pieces in stoneware and porcelain.</p>
+  </div>
+  <div class="hero-img">
+    <img src="images/DSC_0114.jpg" alt="Featured piece" />
+    <div class="hero-meta">
+      <span>No. 01 — Selected Works, Spring</span>
+      <span class="scroll-cue"><span>Scroll</span><span class="line"></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── GALLERY ───────────────────── -->
+<section id="works" class="gallery-wrap">
+  <div class="gallery-pin">
+    <div class="gallery-track" id="track">
+
+      <div class="gallery-head">
+        <span class="eyebrow">Selected Works · 2024 — 2026</span>
+        <h2>Eleven pieces, <em>each one a study</em> in form.</h2>
+        <p>Drawn from the studio shelf — small editions and singular pieces, photographed in natural light. Move sideways to walk the row.</p>
+      </div>
+
+      <article class="piece medium">
+        <div class="frame"><span class="num">01</span><img src="images/DSC_0117.jpg" alt=""/></div>
+        <div class="caption"><div class="name"><em>Geode</em> Sphere</div><div class="meta">Stoneware</div></div>
+        <p class="desc">Crystalline facets break across the surface — cream against ribbons of teal, periwinkle, and aubergine.</p>
+      </article>
+
+      <article class="piece small tall">
+        <div class="frame"><span class="num">02</span><img src="images/DSC_0115.jpg" alt=""/></div>
+        <div class="caption"><div class="name"><em>Loop</em> Jar</div><div class="meta">Stoneware</div></div>
+        <p class="desc">Powder blue over oatmeal, with white slip-trailed loops at the foot.</p>
+      </article>
+
+      <article class="piece large">
+        <div class="frame"><span class="num">03</span><img src="images/DSC_0116.jpg" alt=""/></div>
+        <div class="caption"><div class="name">Indigo-lined <em>Cup</em></div><div class="meta">Stoneware</div></div>
+        <p class="desc">Olive and peach outside; a deep navy pool within.</p>
+      </article>
+
+      <article class="piece medium">
+        <div class="frame"><span class="num">04</span><img src="images/DSC_0118.jpg" alt=""/></div>
+        <div class="caption"><div class="name"><em>Plum</em> Vessel</div><div class="meta">Stoneware</div></div>
+        <p class="desc">A glossy aubergine shoulder settling into raw honey-buff stoneware.</p>
+      </article>
+
+      <article class="piece small">
+        <div class="frame"><span class="num">05</span><img src="images/DSC_0119.jpg" alt=""/></div>
+        <div class="caption"><div class="name">Faceted <em>Orb</em></div><div class="meta">Stoneware</div></div>
+        <p class="desc">A small sphere — ribbons of teal and copper cutting across a cream cap.</p>
+      </article>
+
+      <article class="piece medium tall">
+        <div class="frame"><span class="num">06</span><img src="images/DSC_0120.jpg" alt=""/></div>
+        <div class="caption"><div class="name">Everyday <em>Pitcher</em></div><div class="meta">Stoneware</div></div>
+        <p class="desc">Cream above, a soft blue band, the foot left bare.</p>
+      </article>
+
+      <article class="piece large">
+        <div class="frame"><span class="num">07</span><img src="images/DSC_0121.jpg" alt=""/></div>
+        <div class="caption"><div class="name">Sphere, <em>in Drift</em></div><div class="meta">Stoneware</div></div>
+        <p class="desc">Teal and lilac drift across the shoulder of a round, full-bellied vase.</p>
+      </article>
+
+      <article class="piece medium">
+        <div class="frame"><span class="num">08</span><img src="images/DSC_0122.jpg" alt=""/></div>
+        <div class="caption"><div class="name">Open <em>Bowl</em>, Cobalt</div><div class="meta">Stoneware</div></div>
+        <p class="desc">A wide, open form — glaze deepening from a soft rim to a saturated base.</p>
+      </article>
+
+      <article class="piece small">
+        <div class="frame"><span class="num">09</span><img src="images/DSC_0123.jpg" alt=""/></div>
+        <div class="caption"><div class="name"><em>Magenta</em> Dish</div><div class="meta">Stoneware</div></div>
+        <p class="desc">A raspberry pool held inside a sand-glazed rim, throwing rings still visible.</p>
+      </article>
+
+      <article class="piece large">
+        <div class="frame"><span class="num">10</span><img src="images/DSC_0124.jpg" alt=""/></div>
+        <div class="caption"><div class="name">Bud <em>Vase</em>, Drift</div><div class="meta">Stoneware</div></div>
+        <p class="desc">Soft mauve ribbons against a quiet cream body, the lip flared just slightly.</p>
+      </article>
+
+      <div class="gallery-end">
+        <span class="eyebrow">End of row</span>
+        <p>Pieces are available by <em>inquiry</em>. New work added each season.</p>
+      </div>
+
+    </div>
+    <div class="progress"><span>Row 01</span><div class="bar"></div><span id="pcount">00 / 10</span></div>
+  </div>
+</section>
+
+<!-- ───────────────────── ABOUT ───────────────────── -->
+<section id="about" class="about">
+  <div>
+    <span class="eyebrow">The Studio</span>
+    <h2 class="reveal">A practice in <em>patience.</em></h2>
+  </div>
+  <div class="body reveal">
+    <p class="lead">Lily's work begins on the wheel, but it doesn't always end there. Each piece passes through her hands many times — thrown, trimmed, dried, glazed, fired — over the course of weeks.</p>
+    <p>The studio is small. Editions are smaller. Most pieces are one-of-a-kind, made in a quiet corner of the house with the door open to the garden. She works in stoneware and porcelain, with a palette of glazes mixed by hand and refined over many firings.</p>
+    <p>The aim is not perfection. The aim is to make objects that feel honest in the hand — vessels you reach for in the morning, bowls you set down on the table without thinking. Quiet things, made slowly.</p>
+  </div>
+</section>
+
+<!-- ───────────────────── CONTACT ───────────────────── -->
+<section id="contact" class="contact">
+  <div>
+    <span class="eyebrow">Inquiries</span>
+    <h2>Say <em>hello.</em><br><a href="mailto:lilypottery@sturman.org">lilypottery@sturman.org</a></h2>
+  </div>
+  <div class="info">
+    Studio visits by appointment<br>
+    Northern California<br>
+    Instagram &nbsp;·&nbsp; @lilyspottery
+  </div>
+</section>
+
+<footer>
+  <span>© Lily's Pottery, 2026</span>
+  <span>Made by hand</span>
+</footer>
+
+<script>
+  // ── Horizontal scroll: translate the track based on scroll progress through the wrapper ──
+  const wrap  = document.querySelector('.gallery-wrap');
+  const pin   = document.querySelector('.gallery-pin');
+  const track = document.getElementById('track');
+  const progressEl = document.querySelector('.progress .bar');
+  const pcount = document.getElementById('pcount');
+  const pieces = track.querySelectorAll('.piece');
+  const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
+
+  function sizeWrap(){
+    if(isMobile()){ wrap.style.height='auto'; return; }
+    // Set wrapper height so the user must scroll (trackWidth - viewportWidth) vertical pixels
+    // to translate the full track horizontally.
+    const distance = track.scrollWidth - window.innerWidth;
+    wrap.style.height = (window.innerHeight + Math.max(0, distance)) + 'px';
+  }
+
+  function onScroll(){
+    if(isMobile()){ track.style.transform=''; return; }
+    const rect = wrap.getBoundingClientRect();
+    const distance = track.scrollWidth - window.innerWidth;
+    const scrolled = Math.min(Math.max(-rect.top, 0), wrap.offsetHeight - window.innerHeight);
+    const max = wrap.offsetHeight - window.innerHeight;
+    const t = max > 0 ? scrolled / max : 0;
+    track.style.transform = `translate3d(${-distance * t}px,0,0)`;
+    if(progressEl){
+      progressEl.style.setProperty('--p', (t*100).toFixed(1)+'%');
+      const idx = Math.min(pieces.length, Math.round(t * pieces.length));
+      pcount.textContent = String(idx).padStart(2,'0') + ' / ' + String(pieces.length).padStart(2,'0');
+    }
+  }
+
+  let raf;
+  window.addEventListener('scroll', ()=>{ cancelAnimationFrame(raf); raf = requestAnimationFrame(onScroll); }, {passive:true});
+  window.addEventListener('resize', ()=>{ sizeWrap(); onScroll(); });
+  window.addEventListener('load', ()=>{ sizeWrap(); onScroll(); });
+  sizeWrap();
+
+  // ── Reveal-on-scroll for the About section ──
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
