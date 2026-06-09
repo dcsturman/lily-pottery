@@ -48,8 +48,7 @@ const pieces = [
     img: "DSC_0120.jpg",
     name: "Everyday <em>Pitcher</em>",
     material: "Stoneware",
-    desc: "Cream above, a soft blue band, the foot left bare.",
-    feature: "tall"
+    desc: "Cream above, a soft blue band, the foot left bare."
   },
   {
     img: "DSC_0121.jpg",
